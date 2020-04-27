@@ -44,6 +44,24 @@ const Home = () => {
     }
   ]);
 
+  const [list, setList] = useState([
+    {
+      key: "1",
+      image:
+        "https://m.media-amazon.com/images/M/MV5BMzQxMzE5NzM2NV5BMl5BanBnXkFtZTgwMDQ4NTUyNzE@._V1_.jpg"
+    },
+    {
+      key: "2",
+      image:
+        "https://m.media-amazon.com/images/M/MV5BMTY5ODk1NzUyMl5BMl5BanBnXkFtZTgwMjUyNzEyMTE@._V1_UY1200_CR85,0,630,1200_AL_.jpg"
+    },
+    {
+      key: "3",
+      image:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/2/25/Fullmetal_Alchemist_2003.jpg/220px-Fullmetal_Alchemist_2003.jpg"
+    }
+  ]);
+
   const carouselRef = useRef(null);
 
   const { width, height } = Dimensions.get("window");
@@ -75,7 +93,7 @@ const Home = () => {
     );
   };
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: "#000" }}>
       <View style={styles.carouselContentContainer}>
         <View style={{ ...StyleSheet.absoluteFill, backgroundColor: "#000" }}>
           <ImageBackground
@@ -143,6 +161,98 @@ const Home = () => {
           </ImageBackground>
         </View>
       </View>
+
+      <View style={{ marginHorizontal: 14 }}>
+        <Text
+          style={{
+            color: "white",
+            fontSize: 24,
+            fontWeight: "bold",
+            marginBottom: 24
+          }}
+        >
+          Continue Watching
+        </Text>
+        <ImageBackground
+          source={{
+            uri:
+              "https://upload.wikimedia.org/wikipedia/en/1/13/DB_THE_MOVIE_NO._20.jpg"
+          }}
+          style={{ height: 250, width: "100%", backgroundColor: "#000" }}
+          resizeMode="cover"
+        >
+          <Text style={{ color: "white", padding: 14 }}>
+            Dragon Ball Super: Broly
+          </Text>
+          <TouchableOpacity
+            style={{
+              ...styles.playIconContainer,
+              position: "absolute",
+              top: "40%",
+              right: "40%"
+            }}
+          >
+            <FontAwesome5
+              name="play"
+              size={22}
+              color="#02ad94"
+              style={{ marginLeft: 4 }}
+            />
+          </TouchableOpacity>
+        </ImageBackground>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 24,
+            marginTop: 36
+          }}
+        >
+          <Text style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>
+            My List
+          </Text>
+          <Text style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>
+            View All
+          </Text>
+        </View>
+
+        <FlatList
+          style={{ marginBottom: 30 }}
+          data={list}
+          horizontal={true}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity style={{ marginRight: 20 }}>
+                <Image
+                  source={{ uri: item.image }}
+                  style={{ height: 300, width: 200 }}
+                />
+                <View
+                  style={{
+                    position: "absolute",
+                    height: 5,
+                    width: "100%",
+                    backgroundColor: "#02ad94",
+                    opacity: 0.8
+                  }}
+                ></View>
+                <FontAwesome5
+                  name="play"
+                  size={38}
+                  color="#fff"
+                  style={{
+                    position: "absolute",
+                    top: "45%",
+                    left: "45%",
+                    opacity: 0.9
+                  }}
+                />
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </View>
     </ScrollView>
   );
 };
@@ -151,7 +261,6 @@ const styles = StyleSheet.create({
   carouselContentContainer: {
     flex: 1,
     backgroundColor: "#000",
-    height: 720,
     paddingHorizontal: 14
   },
   ImageBg: {
